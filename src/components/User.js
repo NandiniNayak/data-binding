@@ -6,7 +6,8 @@ export default function User(props){
             {/* display the props passed from the parent */}
             {/* props are read only */}
             <h1>I am {props.name}</h1>
-            <input value={props.name} onChange={props.editUser} />
+            <input value={props.name} onChange={props.changeUser}/>
+            <button onClick={props.deleteEvent}>Delete</button>
         </div>
     )
 }
