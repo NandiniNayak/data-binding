@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
 import User from "./components/User"
+import Form from './components/Form';
 
 class App extends Component {
   constructor(props){
@@ -34,18 +35,31 @@ class App extends Component {
       users: userCopy
     })
   }
-  
+
+  addUser = (name) =>{
+    const id = this.state.users.length + 1;
+    this.setState({
+      users: [...this.state.users, {id, name}]
+    })
+  }
+
   render(){
     // loop through each user and pass the user name as a prop to User component
     // while passing arguments to an event, you should either bind or use arrow function
     return (
-      this.state.users.map((user, index) => 
-      <User 
-         changeUser={this.editUser.bind(this,index)} 
-         deleteEvent={this.deleteUser.bind(this,index)}
-         key={user.id}
-         name={user.name} 
-      />)
+      <div>
+        <Form
+           addEvent={this.addUser}
+        />
+        {this.state.users.map((user, index) =>
+          <User
+            changeUser={this.editUser.bind(this, index)}
+            deleteEvent={this.deleteUser.bind(this, index)}
+            key={user.id}
+            name={user.name}
+          />
+        )}
+      </div>
     );
   }
 }
